@@ -12,10 +12,14 @@ import com.pluralsight.model.Ride;
 @Repository("rideRepository")
 public class RideRepositoryImpl implements RideRepository {
 
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@Override
+    @Autowired
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
 	public List<Ride> getRides() {
 		Ride ride = new Ride();
 		ride.setName("Corner Canyon");
