@@ -15,4 +15,6 @@ public interface RideService {
     Ride getRide(int id);
 
     void empty();
+
+    Ride updateRide(Ride ride);
 }

@@ -38,4 +38,9 @@ public class RideServiceImpl implements RideService {
     public void empty() {
         rideRepository.empty();
     }
+
+	@Override
+	public Ride updateRide(Ride ride) {
+		return rideRepository.updateRide(ride);
+	}
 }

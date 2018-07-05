@@ -15,4 +15,6 @@ public interface RideRepository {
     Integer countRide();
 
     void empty();
+
+    Ride updateRide(Ride ride);
 }
