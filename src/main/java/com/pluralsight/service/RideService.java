@@ -17,4 +17,6 @@ public interface RideService {
     void empty();
 
     Ride updateRide(Ride ride);
+
+    void batch();
 }
