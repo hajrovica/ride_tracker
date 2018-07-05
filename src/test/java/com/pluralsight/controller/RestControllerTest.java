@@ -84,4 +84,12 @@ public class RestControllerTest {
 //        System.out.println("Ride name: " + ride.getName());
     }
 
+
+    @Test(timeout=3000)
+    public void testDelete() {
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.delete("http://localhost:8080/ride/delete/1");
+    }
+
 }
