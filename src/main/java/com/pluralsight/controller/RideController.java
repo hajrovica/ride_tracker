@@ -28,4 +28,15 @@ public class RideController {
 	    return rideService.createRide(ride);
     }
 
+	@RequestMapping(value = "/count", method = RequestMethod.GET)
+    public  @ResponseBody Integer countRides(){
+	    return rideService.countRide();
+    }
+
+	@RequestMapping(value = "/empty", method = RequestMethod.GET)
+    public  @ResponseBody Integer emptyRides(){
+	    rideService.empty();
+	    return null;
+    }
+
 }

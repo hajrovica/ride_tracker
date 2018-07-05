@@ -9,4 +9,8 @@ public interface RideRepository {
 	List<Ride> getRides();
 
     Ride createRide(Ride ride);
+
+    Integer countRide();
+
+    void empty();
 }

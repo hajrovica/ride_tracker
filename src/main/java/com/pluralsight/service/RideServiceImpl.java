@@ -23,4 +23,14 @@ public class RideServiceImpl implements RideService {
 	public Ride createRide(Ride ride) {
 		return rideRepository.createRide(ride);
 	}
+
+	@Override
+	public Integer countRide() {
+		return  rideRepository.countRide();
+	}
+
+    @Override
+    public void empty() {
+        rideRepository.empty();
+    }
 }
