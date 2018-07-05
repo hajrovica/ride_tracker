@@ -1,5 +1,7 @@
 package com.pluralsight.repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +12,10 @@ import com.pluralsight.repository.util.RideRowMapper;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.pluralsight.model.Ride;
@@ -52,9 +57,29 @@ public class RideRepositoryImpl implements RideRepository {
     @Override
     public Ride createRide(Ride ride) {
 
-        jdbcTemplate.update("insert into ride (name, duration) values (?, ?)", ride.getName(), ride.getDuration());
+        //jdbcTemplate.update("insert into ride (name, duration) values (?, ?)", ride.getName(), ride.getDuration());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement("insert into ride (name, duration) values (?, ?)", new String[]{"id"});
+                ps.setString(1, ride.getName());
+                ps.setInt(2, ride.getDuration());
+                return ps;
+            }
+        }, keyHolder);
 
-        return null;
+        Number id = keyHolder.getKey();
+
+        return getRide(id.intValue());
+    }
+
+    private Ride getRide(int i) {
+        String sql = "select * from ride where id=?";
+        Ride ride = jdbcTemplate.queryForObject(sql, new RideRowMapper(), i);
+        System.out.println("Ride: " + ride);
+
+        return ride;
     }
 
     @Override
