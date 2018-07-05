@@ -92,4 +92,11 @@ public class RestControllerTest {
         restTemplate.delete("http://localhost:8080/ride/delete/1");
     }
 
+    @Test(timeout=3000)
+    public void testException() {
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.getForObject("http://localhost:8080/test", Ride.class)
+    }
+
 }
