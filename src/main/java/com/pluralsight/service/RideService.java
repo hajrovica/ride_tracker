@@ -12,5 +12,7 @@ public interface RideService {
 
     Integer countRide();
 
+    Ride getRide(int id);
+
     void empty();
 }

@@ -29,6 +29,11 @@ public class RideServiceImpl implements RideService {
 		return  rideRepository.countRide();
 	}
 
+	@Override
+	public Ride getRide(int id){
+		return rideRepository.getRide(id);
+	}
+
     @Override
     public void empty() {
         rideRepository.empty();

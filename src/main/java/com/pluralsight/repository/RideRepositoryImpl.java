@@ -92,7 +92,8 @@ public class RideRepositoryImpl implements RideRepository {
         return getRide(id.intValue());
     }
 
-    private Ride getRide(int i) {
+    @Override
+    public Ride getRide(int i) {
         String sql = "select * from ride where id=?";
         Ride ride = jdbcTemplate.queryForObject(sql, new RideRowMapper(), i);
         System.out.println("Ride: " + ride);

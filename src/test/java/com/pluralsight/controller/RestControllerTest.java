@@ -41,17 +41,26 @@ public class RestControllerTest {
 
 
 	@Test(timeout=3000)
-	public void testGetRides() {
+	public void testGetRide() {
 		RestTemplate restTemplate = new RestTemplate();
 
-		ResponseEntity<List<Ride>> ridesResponse = restTemplate.exchange(
-				"http://localhost:8080/rides", HttpMethod.GET,
-				null, new ParameterizedTypeReference<List<Ride>>() {
-				});
-		List<Ride> rides = ridesResponse.getBody();
-
-		for (Ride ride : rides) {
-			System.out.println("Ride name: " + ride.getName());
-		}
+		Ride ride = restTemplate.getForObject("http://localhost:8080/ride/1", Ride.class);
+        System.out.println("Ride name: " + ride.getName());
 	}
+
+    @Test(timeout=3000)
+    public void testGetRides() {
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<List<Ride>> ridesResponse = restTemplate.exchange(
+                "http://localhost:8080/ride", HttpMethod.GET,
+                null, new ParameterizedTypeReference<List<Ride>>() {
+                });
+        List<Ride> rides = ridesResponse.getBody();
+
+        for (Ride ride : rides) {
+            System.out.println("Ride name: " + ride.getName());
+        }
+    }
+
 }

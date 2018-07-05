@@ -10,6 +10,8 @@ public interface RideRepository {
 
     Ride createRide(Ride ride);
 
+    Ride getRide(int i);
+
     Integer countRide();
 
     void empty();
