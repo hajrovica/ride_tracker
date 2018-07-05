@@ -29,7 +29,7 @@ public class RestControllerTest {
         ride.setName("Ride New");
         ride.setDuration(10);
 
-        restTemplate.put("http://localhost:8080/ride", ride);
+        ride = restTemplate.postForObject("http://localhost:8080/ride", ride, Ride.class);
         String countRide = restTemplate.exchange("http://localhost:8080/count", HttpMethod.GET, null, String.class).getBody();
 
 //        Integer countRide = rideService.countRide();
