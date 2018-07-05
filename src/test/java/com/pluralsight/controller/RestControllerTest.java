@@ -26,7 +26,7 @@ public class RestControllerTest {
         restTemplate.exchange("http://localhost:8080/empty", HttpMethod.GET, null, String.class);
 
         Ride ride = new Ride();
-        ride.setName("Ride 1");
+        ride.setName("Ride New");
         ride.setDuration(10);
 
         restTemplate.put("http://localhost:8080/ride", ride);
