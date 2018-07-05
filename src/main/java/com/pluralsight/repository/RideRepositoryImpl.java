@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.pluralsight.repository.util.RideRowMapper;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,18 +34,7 @@ public class RideRepositoryImpl implements RideRepository {
 //		rides.add(ride);
         String sql = "select * from ride";
 //        List<Ride> rides = new ArrayList<>();
-        List<Ride> rides = jdbcTemplate.query("select * from ride", new RowMapper<Ride>() {
-            @Override
-            public Ride mapRow(ResultSet resultSet, int i) throws SQLException {
-                //template method pattern - check it
-                Ride ride = new Ride();
-                ride.setId(resultSet.getInt("id"));
-                ride.setName(resultSet.getString("name"));
-                ride.setDuration(resultSet.getInt("duration"));
-                return ride;
-            }
-
-        });
+        List<Ride> rides = jdbcTemplate.query("select * from ride", new RideRowMapper());
 
 //        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
 //
